@@ -34,6 +34,9 @@ public class UserServlet extends HttpServlet {
                 case "edit":
                     updateUser(request, response);
                     break;
+                case "search":
+                    displaySearch(request,response);
+                    break;
             }
         } catch (SQLException ex) {
             throw new ServletException(ex);
@@ -58,6 +61,9 @@ public class UserServlet extends HttpServlet {
                     break;
                 case "delete":
                     deleteUser(request, response);
+                    break;
+                case "search":
+                    showSearchForm(request,response);
                     break;
                 default:
                     listUser(request, response);
@@ -126,6 +132,20 @@ public class UserServlet extends HttpServlet {
         request.setAttribute("listUser", listUser);
         RequestDispatcher dispatcher = request.getRequestDispatcher("user/list.jsp");
         dispatcher.forward(request, response);
+    }
+
+    private void showSearchForm(HttpServletRequest request,HttpServletResponse response) throws IOException,ServletException{
+        RequestDispatcher dispatcher = request.getRequestDispatcher("user/search.jsp");
+        dispatcher.forward(request,response);
+    }
+
+    private void displaySearch(HttpServletRequest request, HttpServletResponse response) throws IOException,ServletException{
+        String country = request.getParameter("country");
+        List<User> existingUser = userDAO.searchUser(country);
+
+        request.setAttribute("userSearch",existingUser);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("user/display.jsp");
+        dispatcher.forward(request,response);
     }
 }
 
