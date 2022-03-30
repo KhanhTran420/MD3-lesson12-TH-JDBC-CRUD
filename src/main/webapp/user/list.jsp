@@ -17,12 +17,19 @@
     <h1>User Management</h1>
     <h2>
         <a href="/users?action=create">Add New User</a>
+    </h2>
+    <h2>
         <a href="/users?action=search">Search</a>
+    </h2>
+    <h2>
+        <a href="/users?action=sort">Sort By Name</a>
     </h2>
 </center>
 <div align="center">
     <table border="1" cellpadding="5">
-        <caption><h2>List of Users</h2></caption>
+        <caption>
+            <h2>List of Users</h2>
+        </caption>
         <tr>
             <th>ID</th>
             <th>Name</th>

@@ -12,7 +12,7 @@ public interface IUserDAO {
 
     public List<User> selectAllUsers();
 
-//    public List<User> selectAllUsersOrdered();
+    public List<User> sortByName();
 
     public boolean deleteUser(int id) throws SQLException;
 

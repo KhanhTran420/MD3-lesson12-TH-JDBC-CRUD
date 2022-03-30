@@ -7,6 +7,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -65,6 +66,8 @@ public class UserServlet extends HttpServlet {
                 case "search":
                     showSearchForm(request,response);
                     break;
+                case "sort":
+                    showSort(request,response);
                 default:
                     listUser(request, response);
                     break;
@@ -72,6 +75,13 @@ public class UserServlet extends HttpServlet {
         } catch (SQLException ex) {
             throw new ServletException(ex);
         }
+    }
+
+    private void showSort(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException{
+        List<User> userList = userDAO.sortByName();
+        request.setAttribute("userList",userList);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("user/sort.jsp");
+        dispatcher.forward(request,response);
     }
 
     private void listUser(HttpServletRequest request, HttpServletResponse response)
